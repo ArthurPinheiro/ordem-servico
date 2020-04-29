@@ -14,8 +14,6 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @Entity
 public class Cliente {
-// git remote add origin https://github.com/ArthurPinheiro/ordem-servico.git
-//git push -u origin master
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
