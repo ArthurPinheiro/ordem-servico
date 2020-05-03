@@ -1,7 +1,7 @@
-package com.ordemservico.com.demo.model;
+package com.ordemservico.com.demo.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ordemservico.com.demo.ValidationGroups;
+import com.ordemservico.com.demo.domain.ValidationGroups;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

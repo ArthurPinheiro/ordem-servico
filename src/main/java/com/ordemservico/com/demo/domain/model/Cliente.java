@@ -1,6 +1,6 @@
-package com.ordemservico.com.demo.model;
+package com.ordemservico.com.demo.domain.model;
 
-import com.ordemservico.com.demo.ValidationGroups;
+import com.ordemservico.com.demo.domain.ValidationGroups;
 import lombok.*;
 
 import javax.persistence.*;

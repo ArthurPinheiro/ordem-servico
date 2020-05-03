@@ -1,4 +1,4 @@
-package com.ordemservico.com.demo.exceptionhandler;
+package com.ordemservico.com.demo.api.exceptionhandler;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

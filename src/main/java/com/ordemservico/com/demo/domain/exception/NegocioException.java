@@ -1,4 +1,4 @@
-package com.ordemservico.com.demo.exception;
+package com.ordemservico.com.demo.domain.exception;
 
 public class NegocioException extends RuntimeException{
 

@@ -1,8 +1,8 @@
-package com.ordemservico.com.demo.controller;
+package com.ordemservico.com.demo.api.controller;
 
-import com.ordemservico.com.demo.model.Cliente;
-import com.ordemservico.com.demo.repository.ClienteRepository;
-import com.ordemservico.com.demo.service.CadastroClienteService;
+import com.ordemservico.com.demo.domain.model.Cliente;
+import com.ordemservico.com.demo.domain.repository.ClienteRepository;
+import com.ordemservico.com.demo.domain.service.CadastroClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

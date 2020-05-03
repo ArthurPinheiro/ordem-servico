@@ -1,6 +1,6 @@
-package com.ordemservico.com.demo.repository;
+package com.ordemservico.com.demo.domain.repository;
 
-import com.ordemservico.com.demo.model.Cliente;
+import com.ordemservico.com.demo.domain.model.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

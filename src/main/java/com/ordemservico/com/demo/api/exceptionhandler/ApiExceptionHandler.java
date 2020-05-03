@@ -1,6 +1,6 @@
-package com.ordemservico.com.demo.exceptionhandler;
+package com.ordemservico.com.demo.api.exceptionhandler;
 
-import com.ordemservico.com.demo.exception.NegocioException;
+import com.ordemservico.com.demo.domain.exception.NegocioException;
 import lombok.var;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
