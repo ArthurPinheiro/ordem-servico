@@ -1,5 +1,6 @@
 package com.ordemservico.com.demo.api.exceptionhandler;
 
+import com.ordemservico.com.demo.domain.exception.EntidadeNaoEncontradaException;
 import com.ordemservico.com.demo.domain.exception.NegocioException;
 import lombok.var;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +27,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NegocioException.class)
     public ResponseEntity<?> handleNegocio(NegocioException ex, WebRequest request) {
         var status = HttpStatus.BAD_REQUEST;
+        var problema = new Problema();
+
+        problema.setStatus(status.value());
+        problema.setTitulo(ex.getMessage());
+        problema.setDataHora(OffsetDateTime.now());
+
+        return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
+    }
+
+    @ExceptionHandler(EntidadeNaoEncontradaException.class)
+    public ResponseEntity<?> entidadeHandleNegocio(NegocioException ex, WebRequest request) {
+        var status = HttpStatus.NOT_FOUND;
         var problema = new Problema();
 
         problema.setStatus(status.value());

@@ -12,7 +12,7 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 public class OrdemServicoModel {
     private Long id;
-    private String nomeCliente;
+    private ClienteResumoModel cliente;
     private String descricao;
     private StatusOdemServico status;
     private OffsetDateTime dataAbertura;

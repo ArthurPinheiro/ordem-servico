@@ -1,5 +1,6 @@
 package com.ordemservico.com.demo.api.controller;
 
+import com.ordemservico.com.demo.api.model.OrdemServicoInput;
 import com.ordemservico.com.demo.api.model.OrdemServicoModel;
 import com.ordemservico.com.demo.domain.model.OrdemServico;
 import com.ordemservico.com.demo.domain.repository.OrdemServicoRepository;
@@ -30,7 +31,8 @@ public class OrdemServicoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public OrdemServicoModel criar(@Valid @RequestBody OrdemServico ordemServico) {
+    public OrdemServicoModel criar(@Valid @RequestBody OrdemServicoInput ordemServicoInput) {
+        OrdemServico ordemServico = toEntity(ordemServicoInput);
         return toModel(service.criar(ordemServico));
     }
 
@@ -50,6 +52,12 @@ public class OrdemServicoController {
         return ResponseEntity.notFound().build();
     }
 
+    @PutMapping("/{ordemServicoId}/finalizacao")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void finalizar(@PathVariable Long ordemServicoId){
+        service.finalizar(ordemServicoId);
+    }
+
     private OrdemServicoModel toModel(OrdemServico ordemServico) {
         return modelMapper.map(ordemServico, OrdemServicoModel.class);
     }
@@ -58,5 +66,9 @@ public class OrdemServicoController {
         return ordemServicos.stream()
                 .map(this::toModel)
                 .collect(Collectors.toList());
+    }
+
+    private OrdemServico toEntity(OrdemServicoInput ordemServicoInput) {
+        return modelMapper.map(ordemServicoInput, OrdemServico.class);
     }
 }

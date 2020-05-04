@@ -2,10 +2,8 @@ package com.ordemservico.com.demo.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ordemservico.com.demo.domain.ValidationGroups;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.ordemservico.com.demo.domain.exception.NegocioException;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -15,6 +13,8 @@ import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @EqualsAndHashCode(of = {"id"})
 @NoArgsConstructor
@@ -44,4 +44,19 @@ public class OrdemServico {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private OffsetDateTime dataFinalizacao;
+
+    @OneToMany(mappedBy = "ordemServico")
+    private List<Comentario> comentarios;
+
+    private boolean podeSerFinalizada() {
+        return StatusOdemServico.ABERTA.equals(getStatus());
+    }
+
+    public void finalizar() {
+        if(!podeSerFinalizada()){
+            throw new NegocioException("Ordem de serviço não pode ser finalizada");
+        }
+        setStatus(StatusOdemServico.FINALIZADA);
+        setDataFinalizacao(OffsetDateTime.now());
+    }
 }
