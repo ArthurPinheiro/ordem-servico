@@ -1,8 +1,11 @@
 package com.ordemservico.com.demo.api.controller;
 
+import com.ordemservico.com.demo.api.model.ClienteInput;
+import com.ordemservico.com.demo.api.model.ClienteModel;
 import com.ordemservico.com.demo.domain.model.Cliente;
 import com.ordemservico.com.demo.domain.repository.ClienteRepository;
 import com.ordemservico.com.demo.domain.service.CadastroClienteService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,9 @@ public class ClienteController {
     @Autowired
     private CadastroClienteService service;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @GetMapping
     public List<Cliente> listar() {
         return repository.findAll();
@@ -35,8 +41,9 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente salvar(@Valid @RequestBody Cliente cliente) {
-        return service.salvar(cliente);
+    public ClienteModel salvar(@Valid @RequestBody ClienteInput clienteInput) {
+        Cliente cliente = toEntity(clienteInput);
+        return toModel(service.salvar(cliente));
     }
 
     @PutMapping("/{clienteId}")
@@ -56,5 +63,13 @@ public class ClienteController {
         }
         service.excluir(clienteId);
         return ResponseEntity.noContent().build();
+    }
+
+    private ClienteModel toModel(Cliente cliente) {
+        return modelMapper.map(cliente, ClienteModel.class);
+    }
+
+    private Cliente toEntity(ClienteInput clienteInput) {
+        return modelMapper.map(clienteInput, Cliente.class);
     }
 }

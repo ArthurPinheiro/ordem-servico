@@ -14,6 +14,7 @@ import javax.validation.constraints.Size;
 @ToString(exclude = "id")
 @EqualsAndHashCode(of = {"id"})
 @NoArgsConstructor
+@Builder(toBuilder = true, access = AccessLevel.PUBLIC)
 @Entity
 public class Cliente {
 
@@ -26,6 +27,8 @@ public class Cliente {
 
     @NotBlank @Email private String email;
 
-    @Column(name = "fone") @Size(max = 20)
+    @Column(name = "fone")
+    @Size(max = 20)
+    @NotBlank
     private String telefone;
 }

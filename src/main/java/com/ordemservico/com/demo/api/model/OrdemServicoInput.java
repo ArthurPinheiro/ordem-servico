@@ -3,7 +3,6 @@ package com.ordemservico.com.demo.api.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -19,7 +18,6 @@ public class OrdemServicoInput {
     private BigDecimal preco;
 
     @NotNull
-    @Valid
-    private ClienteIdInput cliente;
+    private Long idCliente;
 
 }
