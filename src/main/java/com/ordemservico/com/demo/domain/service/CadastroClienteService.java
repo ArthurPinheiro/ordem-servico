@@ -16,7 +16,7 @@ public class CadastroClienteService {
 
     public Cliente salvar(Cliente cliente) {
         Optional<Cliente> clienteExistente = repository.findByEmail(cliente.getEmail());
-        if (clienteExistente.isPresent() && !clienteExistente.equals(cliente)) {
+        if (clienteExistente.isPresent()) {
             throw new NegocioException("Já existe um cliente com esse e-mail");
         }
         return repository.save(cliente);

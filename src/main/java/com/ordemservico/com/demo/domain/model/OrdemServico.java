@@ -1,7 +1,6 @@
 package com.ordemservico.com.demo.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ordemservico.com.demo.domain.ValidationGroups;
 import com.ordemservico.com.demo.domain.exception.NegocioException;
 import lombok.*;
 
@@ -9,18 +8,17 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.groups.ConvertGroup;
-import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = {"descricao"})
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
+@Builder
 public class OrdemServico {
 
     @Id
@@ -28,7 +26,6 @@ public class OrdemServico {
     private Long id;
 
     @NotNull @ManyToOne @Valid
-    @ConvertGroup(from = Default.class, to = ValidationGroups.ClienteId.class)
     private Cliente cliente;
 
     @NotBlank private String descricao;
