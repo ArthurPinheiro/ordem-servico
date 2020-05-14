@@ -12,12 +12,13 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+@ToString(exclude = {"id"})
 @EqualsAndHashCode(of = {"descricao"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity
+@Entity(name = "ordem_servico")
 @Builder
 public class OrdemServico {
 

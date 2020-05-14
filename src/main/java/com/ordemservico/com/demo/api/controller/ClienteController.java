@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,6 +29,11 @@ public class ClienteController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @InitBinder("clienteInput")
+    public void initBinder(WebDataBinder binder){
+        binder.addValidators(new ClienteValidador(repository));
+    }
+
     @GetMapping
     public List<Cliente> listar() {
         return repository.findAll();
@@ -43,16 +49,16 @@ public class ClienteController {
     @ResponseStatus(HttpStatus.CREATED)
     public ClienteModel salvar(@Valid @RequestBody ClienteInput clienteInput) {
         Cliente cliente = toEntity(clienteInput);
-        return toModel(service.salvar(cliente));
+        return toModel(repository.save(cliente));
     }
 
     @PutMapping("/{clienteId}")
-    public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long clienteId, @RequestBody Cliente cliente) {
+    public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long clienteId, @Valid @RequestBody ClienteInput clienteInput) {
         if(!repository.existsById(clienteId)) {
             return ResponseEntity.notFound().build();
         }
-        cliente.setId(clienteId);
-        cliente = service.salvar(cliente);
+        Cliente cliente = toEntity(clienteInput);
+        this.repository.save(cliente);
         return ResponseEntity.ok(cliente);
     }
 

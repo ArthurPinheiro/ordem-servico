@@ -4,9 +4,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 
+@ToString(exclude = {"id"})
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = {"descricao"})
 @NoArgsConstructor
 @Entity
 public class Comentario {

@@ -41,6 +41,11 @@ public class OrdemServicoController {
         return toCollectionModel(repository.findAll());
     }
 
+    @GetMapping(value = "/ativas")
+    public List<OrdemServico> listarStatusAberta() {
+        return repository.findByStatusAtivo();
+    }
+
     @GetMapping("/{ordemServicoId}")
     public ResponseEntity<OrdemServicoModel> buscar(@PathVariable Long ordemServicoId) {
         Optional<OrdemServico> ordemServico = repository.findById(ordemServicoId);
